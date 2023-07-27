@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" integrity="sha512-iecdLmaskl7CVkqkXNQ/ZH/XLlvWZOJyj7Yy7tcenmpD1ypASozpmT/E0iPtmFIB46ZmdtAc9eNBvH0H/ZpiBw==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+    <link rel="stylesheet" href="style.css">
+    
+</head>
+
+<body>
+<div class="container">
+    <div class="meal-wrapper">
+        <div class="meal-search">
+            <h2 class="title">Find Recipes for Your Ingredients</h2>
+            <div class = "meal-search-box">
+                <input type = "text" class= "search-control" placeholder="Enter an ingredient" id="search-input">
+                <button type="submit" class = "search-btn btn" id="search-btn">
+                    <i class="fa-solid fa-magnifying-glass"></i>
+                </button>
+            </div>
+        </div>
+        <div class="meal-result">
+            <h2 class = "title">Your search results:</h2>
+            <div id = "meal">
+                <div class="meal-item">
+                    <div class="meal-img">
+                        <img src="./images/IMG_3621.JPG" alt="food">
+                    </div>
+                    <div class="meal-name">
+                        <h3>Cherry rolls</h3>
+                        <a href="#" class = "recipe-btn">Get recipe</a>
+                    </div>
+                </div>
+                <div class="meal-item">
+                    <div class="meal-img">
+                        <img src="./images/IMG_3621.JPG" alt="food">
+                    </div>
+                    <div class="meal-name">
+                        <h3>Cherry rolls</h3>
+                        <a href="#" class = "recipe-btn">Get recipe</a>
+                    </div>
+                </div>
+                <div class="meal-item">
+                    <div class="meal-img">
+                        <img src="./images/IMG_3621.JPG" alt="food">
+                    </div>
+                    <div class="meal-name">
+                        <h3>Cherry rolls</h3>
+                        <a href="#" class = "recipe-btn">Get recipe</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class ="meal-details">
+            <button type = "button" class="btn recipe-close-btn" id="recipe-close-btn">
+                <i class="fa-solid fa-xmark"></i>
+            </button>
+            <div class = "meal-details-content">
+                <h2 class="recipe-title">Meal name here</h2>
+                <p class="recipe-category">Category name</p>
+                <h3>Ingredients:</h3>
+                <p>Ingredients here</p>
+                <h3>Directions:</h3>
+                <p>Directions here</p>
+            </div>
+            <div class = "recipe-meal-img">
+                <img src = "./images/IMG_3621.JPG" alt="food">
+            </div>
+            
+        </div>
+    </div>
+</div>
+
+
+    <script src="app.js"></script>
+</body>
+
+</html>
