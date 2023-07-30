@@ -1,0 +1,213 @@
+<!--create user profile, loging and logout-->
+
+<!DOCTYPE html>
+<html>
+
+<head>
+    <title>User Profile</title>
+</head>
+
+<body>
+    <h1>User Profile</h1>
+
+    <!-- Registration Form -->
+    <div id="registrationForm">
+        <h2>Create Account</h2>
+        <label for="username">Username:</label>
+        <input type="text" id="username" required><br>
+
+        <label for="password">Password:</label>
+        <input type="password" id="password" required><br>
+
+        <button onclick="createAccount()">Create Account</button>
+    </div>
+
+    <!-- Login Form -->
+    <div id="loginForm" style="display: none;">
+        <h2>Login</h2>
+        <label for="loginUsername">Username:</label>
+        <input type="text" id="loginUsername" required><br>
+
+        <label for="loginPassword">Password:</label>
+        <input type="password" id="loginPassword" required><br>
+
+        <button onclick="login()">Login</button>
+    </div>
+
+    <!-- User Profile Section -->
+    <div id="userProfile" style="display: none;">
+        <h2>Welcome, <span id="loggedInUsername"></span>!</h2>
+        <button onclick="logout()">Logout</button>
+    </div>
+
+    <script>
+        let currentUser = null;
+
+        // Function to create a user account
+        function createAccount() {
+            const username = document.getElementById("username").value;
+            const password = document.getElementById("password").value;
+
+            // Save the user details (in a real app, you'd use a database)
+            currentUser = { username: username, password: password };
+
+            // Hide the registration form and show the login form
+            document.getElementById("registrationForm").style.display = "none";
+            document.getElementById("loginForm").style.display = "block";
+
+            // Clear input fields
+            document.getElementById("username").value = "";
+            document.getElementById("password").value = "";
+        }
+
+        // Function to login to the user profile
+        function login() {
+            const loginUsername = document.getElementById("loginUsername").value;
+            const loginPassword = document.getElementById("loginPassword").value;
+
+            // Check if the login details match the saved user account
+            if (currentUser && currentUser.username === loginUsername && currentUser.password === loginPassword) {
+                // Show the user profile section and update the welcome message
+                document.getElementById("userProfile").style.display = "block";
+                document.getElementById("loggedInUsername").textContent = currentUser.username;
+
+                // Hide the login form
+                document.getElementById("loginForm").style.display = "none";
+
+                // Clear input fields
+                document.getElementById("loginUsername").value = "";
+                document.getElementById("loginPassword").value = "";
+            } else {
+                alert("Invalid username or password. Please try again.");
+            }
+        }
+
+        // Function to logout from the user profile
+        function logout() {
+            // Clear the current user data
+            currentUser = null;
+
+            // Show the registration form and hide the user profile section and login form
+            document.getElementById("registrationForm").style.display = "block";
+            document.getElementById("userProfile").style.display = "none";
+            document.getElementById("loginForm").style.display = "none";
+        }
+    </script>
+</body>
+
+</html>
+
+
+
+
+<!-- same using handlebars-->
+<!DOCTYPE html>
+<html>
+
+<head>
+    <title>User Profile</title>
+</head>
+
+<body>
+    <h1>User Profile</h1>
+
+    <!-- Registration Form -->
+    <div id="registrationForm">
+        <h2>Create Account</h2>
+        <label for="username">Username:</label>
+        <input type="text" id="username" required><br>
+
+        <label for="password">Password:</label>
+        <input type="password" id="password" required><br>
+
+        <button onclick="createAccount()">Create Account</button>
+    </div>
+
+    <!-- Login Form -->
+    <div id="loginForm" style="display: none;">
+        <h2>Login</h2>
+        <label for="loginUsername">Username:</label>
+        <input type="text" id="loginUsername" required><br>
+
+        <label for="loginPassword">Password:</label>
+        <input type="password" id="loginPassword" required><br>
+
+        <button onclick="login()">Login</button>
+    </div>
+
+    <!-- User Profile Section -->
+    <div id="userProfile" style="display: none;">
+        <h2>Welcome, <span id="loggedInUsername"></span>!</h2>
+        <button onclick="logout()">Logout</button>
+    </div>
+
+    <!-- Handlebars templates -->
+    <script id="userProfileTemplate" type="text/x-handlebars-template">
+    <h2>Welcome, <span>{{username}}</span>!</h2>
+    <button onclick="logout()">Logout</button>
+  </script>
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/handlebars.js/4.7.7/handlebars.min.js"></script>
+    <script>
+        let currentUser = null;
+
+        // Function to create a user account
+        function createAccount() {
+            const username = document.getElementById("username").value;
+            const password = document.getElementById("password").value;
+
+            // Save the user details (in a real app, you'd use a database)
+            currentUser = { username: username, password: password };
+
+            // Hide the registration form and show the login form
+            document.getElementById("registrationForm").style.display = "none";
+            document.getElementById("loginForm").style.display = "block";
+
+            // Clear input fields
+            document.getElementById("username").value = "";
+            document.getElementById("password").value = "";
+        }
+
+        // Function to login to the user profile
+        function login() {
+            const loginUsername = document.getElementById("loginUsername").value;
+            const loginPassword = document.getElementById("loginPassword").value;
+
+            // Check if the login details match the saved user account
+            if (currentUser && currentUser.username === loginUsername && currentUser.password === loginPassword) {
+                // Show the user profile section and update the welcome message
+                document.getElementById("userProfile").style.display = "block";
+
+                // Compile the Handlebars template for user profile
+                const userProfileTemplate = document.getElementById("userProfileTemplate").innerHTML;
+                const template = Handlebars.compile(userProfileTemplate);
+
+                // Render the user profile using the template
+                const userProfileContainer = document.getElementById("loggedInUsername");
+                userProfileContainer.innerHTML = template(currentUser);
+
+                // Hide the login form
+                document.getElementById("loginForm").style.display = "none";
+
+                // Clear input fields
+                document.getElementById("loginUsername").value = "";
+                document.getElementById("loginPassword").value = "";
+            } else {
+                alert("Invalid username or password. Please try again.");
+            }
+        }
+
+        // Function to logout from the user profile
+        function logout() {
+            // Clear the current user data
+            currentUser = null;
+
+            // Show the registration form and hide the user profile section and login form
+            document.getElementById("registrationForm").style.display = "block";
+            document.getElementById("userProfile").style.display = "none";
+            document.getElementById("loginForm").style.display = "none";
+        }
+    </script>
+</body>
+
+</html>

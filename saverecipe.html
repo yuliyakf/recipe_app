@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Recipe App</title>
+</head>
+<body>
+  <h1>Welcome to the Recipe App</h1>
+
+  <!-- Sample recipe details -->
+  <div>
+    <h2>Recipe Title: Spaghetti Carbonara</h2>
+    <p>Ingredients: Pasta, Eggs, Bacon, Parmesan Cheese, Black Pepper, Salt</p>
+    <button onclick="saveRecipe('Spaghetti Carbonara')">Save Recipe</button>
+  </div>
+
+  <div>
+    <h2>Recipe Title: Chocolate Chip Cookies</h2>
+    <p>Ingredients: Flour, Butter, Sugar, Chocolate Chips, Baking Soda, Salt</p>
+    <button onclick="saveRecipe('Chocolate Chip Cookies')">Save Recipe</button>
+  </div>
+
+  <!-- User Profile -->
+  <div>
+    <h2>User Profile</h2>
+    <ul id="savedRecipes">
+      <!-- Saved recipes will be displayed here -->
+    </ul>
+  </div>
+
+  <script>
+    // Function to save a recipe to the user's profile
+    function saveRecipe(recipeTitle) {
+      // Check if localStorage is supported by the browser
+      if (typeof(Storage) !== "undefined") {
+        // Get the existing saved recipes or initialize an empty array
+        let savedRecipes = JSON.parse(localStorage.getItem("savedRecipes")) || [];
+
+        // Check if the recipe is not already saved before adding it
+        if (!savedRecipes.includes(recipeTitle)) {
+          savedRecipes.push(recipeTitle);
+
+          // Save the updated array of recipes to localStorage
+          localStorage.setItem("savedRecipes", JSON.stringify(savedRecipes));
+
+          // Update the displayed saved recipes
+          displaySavedRecipes();
+        } else {
+          alert("Recipe is already saved!");
+        }
+      } else {
+        alert("Sorry, your browser does not support local storage. Cannot save the recipe.");
+      }
+    }
+
+    // Function to display saved recipes on the user profile
+    function displaySavedRecipes() {
+      const savedRecipesList = document.getElementById("savedRecipes");
+      savedRecipesList.innerHTML = "";
+
+      // Get the saved recipes from localStorage
+      let savedRecipes = JSON.parse(localStorage.getItem("savedRecipes")) || [];
+
+      // Display each saved recipe as a list item
+      savedRecipes.forEach(recipeTitle => {
+        const listItem = document.createElement("li");
+        listItem.textContent = recipeTitle;
+        savedRecipesList.appendChild(listItem);
+      });
+    }
+
+    // Display saved recipes when the page loads
+    displaySavedRecipes();
+  </script>
+</body>
+</html>

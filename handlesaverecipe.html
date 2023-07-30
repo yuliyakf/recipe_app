@@ -1,0 +1,104 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Recipe App</title>
+</head>
+<body>
+  <h1>Welcome to the Recipe App</h1>
+
+  <!-- Recipe template -->
+  <script id="recipeTemplate" type="text/x-handlebars-template">
+    <div>
+      <h2>Recipe Title: {{title}}</h2>
+      <p>Ingredients: {{ingredients}}</p>
+      <button onclick="saveRecipe('{{title}}')">Save Recipe</button>
+    </div>
+  </script>
+
+  <!-- Sample recipe details -->
+  <div id="recipeContainer">
+    <!-- The dynamic recipes will be displayed here -->
+  </div>
+
+  <!-- User Profile template -->
+  <script id="userProfileTemplate" type="text/x-handlebars-template">
+    <div>
+      <h2>User Profile</h2>
+      <ul>
+        {{#each savedRecipes}}
+          <li>{{this}}</li>
+        {{/each}}
+      </ul>
+    </div>
+  </script>
+
+  <!-- User Profile -->
+  <div id="userProfileContainer">
+    <!-- The dynamic user profile will be displayed here -->
+  </div>
+
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/handlebars.js/4.7.7/handlebars.min.js"></script>
+  <script>
+    // Sample recipe details
+    const recipesData = [
+      { title: "Spaghetti Carbonara", ingredients: "Pasta, Eggs, Bacon, Parmesan Cheese, Black Pepper, Salt" },
+      { title: "Chocolate Chip Cookies", ingredients: "Flour, Butter, Sugar, Chocolate Chips, Baking Soda, Salt" }
+    ];
+
+    // Compile the Handlebars templates
+    const recipeTemplate = document.getElementById("recipeTemplate").innerHTML;
+    const userProfileTemplate = document.getElementById("userProfileTemplate").innerHTML;
+
+    // Function to render recipes
+    function renderRecipes() {
+      const recipeContainer = document.getElementById("recipeContainer");
+
+      // Render each recipe using the template
+      recipesData.forEach(recipe => {
+        const template = Handlebars.compile(recipeTemplate);
+        recipeContainer.innerHTML += template(recipe);
+      });
+    }
+
+    // Function to render user profile
+    function renderUserProfile() {
+      const userProfileContainer = document.getElementById("userProfileContainer");
+
+      // Get the saved recipes from localStorage
+      let savedRecipes = JSON.parse(localStorage.getItem("savedRecipes")) || [];
+
+      // Render the user profile using the template
+      const template = Handlebars.compile(userProfileTemplate);
+      userProfileContainer.innerHTML = template({ savedRecipes });
+    }
+
+    // Function to save a recipe to the user's profile
+    function saveRecipe(recipeTitle) {
+      // Check if localStorage is supported by the browser
+      if (typeof(Storage) !== "undefined") {
+        // Get the existing saved recipes or initialize an empty array
+        let savedRecipes = JSON.parse(localStorage.getItem("savedRecipes")) || [];
+
+        // Check if the recipe is not already saved before adding it
+        if (!savedRecipes.includes(recipeTitle)) {
+          savedRecipes.push(recipeTitle);
+
+          // Save the updated array of recipes to localStorage
+          localStorage.setItem("savedRecipes", JSON.stringify(savedRecipes));
+
+          // Update the displayed user profile
+          renderUserProfile();
+        } else {
+          alert("Recipe is already saved!");
+        }
+      } else {
+        alert("Sorry, your browser does not support local storage. Cannot save the recipe.");
+      }
+    }
+
+    // Render the recipes and user profile when the page loads
+    renderRecipes();
+    renderUserProfile();
+  </script>
+</body>
+</html>

@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <title>Product Customer Reviews</title>
+    <style>
+        /* Add some basic styling for the reviews */
+        .review {
+            border: 1px solid #ccc;
+            padding: 10px;
+            margin-bottom: 10px;
+        }
+    </style>
+</head>
+
+<body>
+    <h1>Product Customer Reviews</h1>
+
+    <!-- Form to submit customer reviews -->
+    <form id="reviewForm">
+        <label for="name">Name:</label>
+        <input type="text" id="name" required><br>
+
+        <label for="rating">Rating (1-5):</label>
+        <input type="number" id="rating" min="1" max="5" required><br>
+
+        <label for="review">Review:</label><br>
+        <textarea id="review" rows="4" required></textarea><br>
+
+        <button type="submit">Submit Review</button>
+    </form>
+
+    <!-- Container to display customer reviews -->
+    <div id="reviewsContainer">
+        <h2>Customer Reviews:</h2>
+        <div id="reviews">
+            <!-- The dynamic reviews will be displayed here -->
+        </div>
+    </div>
+
+    <script>
+        // Function to handle form submission
+        document.getElementById("reviewForm").addEventListener("submit", function (event) {
+            event.preventDefault(); // Prevent form submission
+
+            // Get form values
+            const name = document.getElementById("name").value;
+            const rating = document.getElementById("rating").value;
+            const reviewText = document.getElementById("review").value;
+
+            // Create a new review element
+            const reviewElement = document.createElement("div");
+            reviewElement.classList.add("review");
+            reviewElement.innerHTML = `
+        <strong>${name}</strong> 
+        <span>Rating: ${rating}</span>
+        <p>${reviewText}</p>
+      `;
+
+            // Add the review to the reviews container
+            const reviewsContainer = document.getElementById("reviews");
+            reviewsContainer.appendChild(reviewElement);
+
+            // Clear the form fields for the next review
+            document.getElementById("name").value = "";
+            document.getElementById("rating").value = "";
+            document.getElementById("review").value = "";
+        });
+    </script>
+</body>
+
+</html>
