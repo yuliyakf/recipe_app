@@ -85,7 +85,7 @@ function searchRecipes() {
     const searchResultsDiv = document.getElementById("searchResults");
     searchResultsDiv.innerHTML = "";
 
-//need to check the below save button so it would 
+//need to check the below save button so it would. need to be saved in local storage and then pulled in user profile under saved recipes.
 
     if (results.length === 0) {
       searchResultsDiv.innerHTML = "<p>No recipes found.</p>";
