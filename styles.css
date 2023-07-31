@@ -1,0 +1,74 @@
+/* LOGO */
+.logo{
+    margin-left: 20px;
+    margin-top: 20px;
+    color:rgb(79, 11, 11);
+}
+
+.headline{
+    text-align: center;
+    margin-top: 20px;
+}
+.headline-text{
+    margin: 20px;
+    text-align: center;
+}
+
+/* Slideshow container */
+.slideshow-container {
+    max-width: 70%;
+    position: relative;
+    margin: 0 auto;
+   margin-top: 40px;
+  }
+
+  /* Hide the images by default */
+  .slide {
+  margin: 0 auto;
+    display: none;
+    width: 90%;
+    height: 700px;
+    object-fit:cover;
+  }
+
+/*Browse recipes page */
+
+.searchRecipesWrapper{
+     text-align: center; 
+}
+.searchRecipes{
+    width: 40%;
+   margin-top: 30px;
+   height: 50px;
+   border-radius: 5px;
+   
+}
+.searchRecipesBtn{
+    width: 10%;
+    margin-top: 30px;
+    height: 50px;
+    border-radius: 5px;
+}
+
+/*User Profile page */
+.userRecipes{
+ margin-top: 20px;
+ text-align: center; 
+} 
+
+/*Submit Recipe page */
+.newRecipeForm{
+   text-align: center; 
+   margin-top: 40px;
+}
+
+.submitRecipeInput{
+    width: 40%;
+    margin: 10px;
+}
+.submitRecipeText{
+    width: 40%;
+    height: 300px;
+    margin: 5px;
+}
+
